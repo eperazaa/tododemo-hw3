@@ -4,7 +4,7 @@ import UserBar from './user/UserBar';
 
 
 function App() {
-  const user = 'Eli'
+  const user = ''
   const items = [
     {
       title: "Task 01",
