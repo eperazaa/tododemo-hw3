@@ -12,8 +12,8 @@ import AddToDoItem from './todos/AddToDoItem';
 function App() {
   
   const base_items = [
-    /*  {
-      ind: 1,
+      {
+      id: 1,
       title: "Task 01",
       description: "Task 01 Description",
       dateCreated: "09/12/2021",
@@ -21,7 +21,7 @@ function App() {
 	    dateCompleted: "09/12/2021"
     },
     {
-      ind: 2,
+      id: 2,
       title: "Task 02",
       description: "Task 02 Description",
       dateCreated: "09/12/2021",
@@ -29,7 +29,7 @@ function App() {
 	    dateCompleted: "09/12/2021"
     },
     {
-      ind: 3,
+      id: 3,
       title: "Task 03",
       description: "Task 03 Description",
       dateCreated: "09/12/2021",
@@ -37,7 +37,7 @@ function App() {
 	    dateCompleted: ""
     },
     {
-      ind: 4,
+      id: 4,
       title: "Task 04",
       description: "Task 04 Description",
       dateCreated: "09/12/2021",
@@ -45,13 +45,13 @@ function App() {
 	    dateCompleted: ""
     },
     {
-      ind: 5,
+      id: 5,
       title: "Task 05",
       description: "Task 05 Description",
       dateCreated: "09/12/2021",
 	    complete: true,
 	    dateCompleted: "09/12/2021"
-    }  */
+    }  
   ]
 
   const [ state, dispatch ] = useReducer(appReducer, { user: '', items: base_items })
@@ -72,7 +72,9 @@ function App() {
       <UserBar user={user} dispatchUser={dispatch} />
       <br/><hr/><br/> 
       {user && <AddToDoItem user={user} dispatch={dispatch} /> }<br/>
+      {user && <div> <h3>Todo List</h3></div>}
       {user && <ToDoList items={items} dispatch={dispatch} />}
+      
     </div>
   )
 }
