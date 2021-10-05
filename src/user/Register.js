@@ -1,28 +1,24 @@
-import React from 'react'
+import React, {useState} from 'react'
 
-export default function Register() {
+export default function Register({dispatchUser}) {
+
+  const [ formData, setFormData ] = useState({
+    username: "",
+    password: "", 
+    passwordRepeat: ""
+})
   return (
     
-      <form onSubmit={e => e.preventDefault()}>
+      <form onSubmit={e => {e.preventDefault(); dispatchUser({type:"REGISTER", username:formData.username}); }}>
           <br/>
           <h3>Sign Up here:</h3>
-          <input placeholder="Username" type="text" name="register-username" id="register-username" /><br/>
+          <input placeholder="Username" type="text" name="register-username" id="register-username" value={formData.username} onChange={e => setFormData({...formData, username: e.target.value})} /><br/>
 
-          <input placeholder="Password" type="password" name="register-password" id="register-password" /><br/>
+          <input placeholder="Password" type="password" name="register-password" id="register-password" value={formData.password} onChange={e => setFormData({...formData, password: e.target.value})} /><br/>
 
-          <input  placeholder="Retype Your Password" type="password" name="register-password-repeat" id="register-password-repeat" /><br/><br/>
+          <input  placeholder="Retype Your Password" type="password" name="register-password-repeat" id="register-password-repeat" value={formData.passwordRepeat} onChange={e => setFormData({...formData, passwordRepeat: e.target.value})} /><br/><br/>
 
-          <select name="register-question" id="register-question">
-          <option disabled hidden selected>Security Question</option>
-            <option value='1'>Pet name?</option>
-            <option value='2'>Mom's maiden name?</option>
-            <option value='3'>High School Math Teacher</option>
-            <option value='4'>High School City?</option>
-          </select><br/>
-
-          <input placeholder="Security Answer" type="text" name="register-answer" id="register-answer" /><br/><br/>
-          
-          <input type="submit" value="Register" />
+          <input type="submit" value="Register" disabled={formData.username.length === 0 || formData.password.length === 0 || formData.password !== formData.passwordRepeat} />
       </form>
   )
 }

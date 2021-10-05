@@ -1,27 +1,25 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import Logout from './Logout'
 import Register from './Register'
 import Login from './Login'
-import AddToDoItem from '../todos/AddToDoItem'
 
-export default function UserBar({user}) {
+export default function UserBar({user, dispatchUser}) {
   
   
 
   if (user) {
       return (
         <div>
-        <Logout user={user} />
-        <AddToDoItem user="Eli" />
+        <Logout user={user} dispatchUser={dispatchUser} />
         </div>
       )
   } else {
       return (
           <div>
-            <Login />
-            <br/><hr/>
-            <Register />
+            <Login dispatchUser={dispatchUser} />
+            <br/><hr/><br/>
+            <Register dispatchUser={dispatchUser} />
           </div>
       )
   }
