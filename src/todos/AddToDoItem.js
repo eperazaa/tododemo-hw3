@@ -1,10 +1,13 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import { StateContext } from '../Contexts'
 
-export default function AddToDoItem ({dispatch}){
+export default function AddToDoItem (){
 
      const [ title, setTitle ] = useState('')
      const [ description, setDescription ] = useState('')
      
+     const {state, dispatch} = useContext(StateContext)
+     const {user} = state;
  
      function handleTitle (evt) { setTitle(evt.target.value) }
  

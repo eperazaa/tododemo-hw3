@@ -1,10 +1,17 @@
 import React from 'react'
 import ToDoItem from './ToDoItem'
 
-export default function ToDoList ({items = [], dispatch}) {
+import { StateContext } from '../Contexts'
+import { useContext } from 'react/cjs/react.development'
+
+export default function ToDoList () {
+
+      const {state} = useContext(StateContext)
+      const {items} = state;
+
      return (
       <div>
-      {items.map((item, i) => <div key={i}><ToDoItem item={item} id={i} key={i} dispatch={dispatch} /><hr /></div>)}
+      {items.map((item, i) => <div key={i}><ToDoItem item={item} id={i} key={i} /><hr /></div>)}
       </div> 
       )
 }

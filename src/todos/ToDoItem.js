@@ -1,6 +1,10 @@
-import React, {useState}  from 'react'
+import React, {useContext}  from 'react'
+import { StateContext } from '../Contexts'
 
-export default function ToDoItem ({id, item,dispatch}) {
+export default function ToDoItem ({id, item}) {
+
+  
+     const {dispatch} = useContext(StateContext)
       
   return (
      <div>
