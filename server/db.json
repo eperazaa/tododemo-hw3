@@ -15,6 +15,30 @@
       "complete": false,
       "dateCompleted": null,
       "id": 3
+    },
+    {
+      "title": "Testing",
+      "description": "Test all the parts of the code needed to fulfill the homework 4",
+      "dateCreated": "10/21/2021",
+      "complete": false,
+      "dateCompleted": null,
+      "id": 4
+    },
+    {
+      "title": "Duplicates",
+      "description": "Check back the discord chat to see if there is a solution for the duplicates",
+      "dateCreated": "10/21/2021",
+      "complete": false,
+      "dateCompleted": null,
+      "id": 5
+    },
+    {
+      "title": "Duplicates 3",
+      "description": "Check back the discord chat to see if there is a solution for the duplicates",
+      "dateCreated": "10/21/2021",
+      "complete": false,
+      "dateCompleted": null,
+      "id": 7
     }
   ],
   "users": [
@@ -32,6 +56,11 @@
       "username": "testregister",
       "password": "regpwd",
       "id": 3
+    },
+    {
+      "username": "reg",
+      "password": "regpwd",
+      "id": 4
     }
   ]
 }

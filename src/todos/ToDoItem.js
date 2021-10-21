@@ -9,7 +9,7 @@ export default function ToDoItem ({id, item}) {
     const {dispatch} = useContext(StateContext)
 
     const [todoitem, deleteToDoItem ] = useResource(() => ({
-        url: `/todos/${item.id}`,  // <-- does not read id without the item., id only is undefined, but can be read don he dispatch
+        url: `/todos/${item.id}`,  // <-- does not read id without the item., id only is undefined, but can be read on the dispatch
         method: 'delete'
     }))
 
@@ -54,7 +54,7 @@ export default function ToDoItem ({id, item}) {
           Description: {item.description}<br/>
           Creation Date: {item.dateCreated}<br/>
           Completion date: {item.dateCompleted ? item.dateCompleted : ""} <br/>
-          <button onClick={e => {e.preventDefault(); handleDeleteToDoItem();}} name="delete">Remove</button>
+          <button onClick={e => {handleDeleteToDoItem();}} name="delete">Remove</button>
      </div> 
  )
 }

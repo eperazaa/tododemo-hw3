@@ -21,7 +21,13 @@ function userReducer (state, action) {
             complete: action.complete,
             dateCompleted: action.dateCompleted
           }
-          return [ newToDoItem, ...state ]
+          const filterTodo = state.filter((t) => t.id === action.id);
+          if (filterTodo.length === 0) {
+            return [ newToDoItem, ...state ]
+          }
+          return state;
+
+
         case 'TOGGLE_TODO_ITEM':  // TODO: locates a specific todo in your todo list and toggles the complete field and sets the dateCompleted field
           console.log("COMPLETE");
           return state.map((item, i) => i === action.id ? { ...item, complete: action.complete, dateCompleted: action.dateCompleted } : item);   
