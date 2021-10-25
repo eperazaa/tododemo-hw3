@@ -5,39 +5,31 @@
       "title": "Add StateContext",
       "description": "Create a State Context in a contexts.js file. Wrap components in a StateContext.Providers tag, passing values for state and dispatch form the appReducer",
       "dateCreated": "10/19/2021",
-      "complete": false,
-      "dateCompleted": null
+      "complete": true,
+      "dateCompleted": "10/24/2021"
     },
     {
       "title": "HW4-Complete Postman items",
       "description": "Create the different request on Postman for HW 4",
       "dateCreated": "10/19/2021",
-      "complete": false,
-      "dateCompleted": null,
+      "complete": true,
+      "dateCompleted": "10/24/2021",
       "id": 3
-    },
-    {
-      "title": "Testing",
-      "description": "Test all the parts of the code needed to fulfill the homework 4",
-      "dateCreated": "10/21/2021",
-      "complete": false,
-      "dateCompleted": null,
-      "id": 4
     },
     {
       "title": "Duplicates",
       "description": "Check back the discord chat to see if there is a solution for the duplicates",
       "dateCreated": "10/21/2021",
-      "complete": false,
-      "dateCompleted": null,
+      "complete": true,
+      "dateCompleted": "10/24/2021",
       "id": 5
     },
     {
       "title": "Duplicates 3",
       "description": "Check back the discord chat to see if there is a solution for the duplicates",
       "dateCreated": "10/21/2021",
-      "complete": false,
-      "dateCompleted": null,
+      "complete": true,
+      "dateCompleted": "10/24/2021",
       "id": 7
     }
   ],
@@ -61,6 +53,11 @@
       "username": "reg",
       "password": "regpwd",
       "id": 4
+    },
+    {
+      "username": "newuser",
+      "password": "newpwd",
+      "id": 5
     }
   ]
 }
