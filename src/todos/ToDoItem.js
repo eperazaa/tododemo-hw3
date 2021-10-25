@@ -9,20 +9,20 @@ export default function ToDoItem ({id, item}) {
     const {dispatch} = useContext(StateContext)
 
     const [todoitem, deleteToDoItem ] = useResource(() => ({
-        url: `/todos/${item.id}`,  // <-- does not read id without the item., id only is undefined, but can be read on the dispatch
+        url: `/todos/${item.id}`,  
         method: 'delete'
     }))
 
 
     function handleDeleteToDoItem () {
         deleteToDoItem();
-        dispatch({type: "DELETE_TODO_ITEM", id: id}); // <--  does not read item.id
+        dispatch({type: "DELETE_TODO_ITEM", id: id}); 
                 
     }
 
 
     const [todoitem2, completeToDoItem ] = useResource((c) => ({
-        url: `/todos/${item.id}`,  // <-- does not read id without the item., id only is undefined, but can be read don he dispatch
+        url: `/todos/${item.id}`,  
         method: 'PATCH',
         data: {
             complete: !c,
