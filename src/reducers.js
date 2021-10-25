@@ -12,7 +12,7 @@ function userReducer (state, action) {
 
   function todoItemReducer (state, action) {
     switch (action.type) {
-        case 'ADD_TODO_ITEM': // TODO: add props for creation date and remove author
+        case 'ADD_TODO_ITEM': 
           const newToDoItem = {
             id: action.id, 
             title: action.title,
@@ -28,11 +28,11 @@ function userReducer (state, action) {
           return state;
 
 
-        case 'TOGGLE_TODO_ITEM':  // TODO: locates a specific todo in your todo list and toggles the complete field and sets the dateCompleted field
+        case 'TOGGLE_TODO_ITEM':  
           console.log("COMPLETE");
           return state.map((item, i) => i === action.id ? { ...item, complete: action.complete, dateCompleted: action.dateCompleted } : item);   
   
-        case 'DELETE_TODO_ITEM': // TODO: removes a specific todo from your todo list
+        case 'DELETE_TODO_ITEM': 
           console.log("DELETE");
           return  state.filter((item, i) => i !== action.id); 
         case 'FETCH_TODO_ITEMS':
