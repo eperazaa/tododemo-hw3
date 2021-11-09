@@ -11,7 +11,7 @@ export default function ToDoList () {
 
      return (
       <div>
-      {items.map((item, i) => <div key={i}><ToDoItem item={item} id={i} key={i} /><hr /></div>)}
+      {items.map((item, i) => <div key={i}><ToDoItem item={item} id={item.id} key={i} /><hr /></div>)}
       </div> 
       )
 }

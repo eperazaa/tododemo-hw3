@@ -1,36 +1,44 @@
 {
   "todos": [
     {
-      "id": 1,
-      "title": "Add StateContext",
-      "description": "Create a State Context in a contexts.js file. Wrap components in a StateContext.Providers tag, passing values for state and dispatch form the appReducer",
-      "dateCreated": "10/19/2021",
-      "complete": true,
-      "dateCompleted": "10/24/2021"
+      "title": "1.- This is the first task to do",
+      "description": "This is the description of the first task yet to be done.",
+      "dateCreated": "11/1/2021",
+      "complete": false,
+      "dateCompleted": null,
+      "id": 1
     },
     {
-      "title": "HW4-Complete Postman items",
-      "description": "Create the different request on Postman for HW 4",
-      "dateCreated": "10/19/2021",
-      "complete": true,
-      "dateCompleted": "10/24/2021",
+      "title": "2.- This is the second task to do",
+      "description": "This is the description of the second task yet to be done.",
+      "dateCreated": "11/1/2021",
+      "complete": false,
+      "dateCompleted": null,
+      "id": 2
+    },
+    {
+      "title": "3.- This is the third task to do",
+      "description": "This is the description of the Third task yet to be done.",
+      "dateCreated": "11/1/2021",
+      "complete": false,
+      "dateCompleted": null,
       "id": 3
     },
     {
-      "title": "Duplicates",
-      "description": "Check back the discord chat to see if there is a solution for the duplicates",
-      "dateCreated": "10/21/2021",
-      "complete": true,
-      "dateCompleted": "10/24/2021",
-      "id": 5
+      "title": "4.- This is the fourth  task to do",
+      "description": "This is the description of the fourth task yet to be done.",
+      "dateCreated": "11/1/2021",
+      "complete": false,
+      "dateCompleted": null,
+      "id": 4
     },
     {
-      "title": "Duplicates 3",
-      "description": "Check back the discord chat to see if there is a solution for the duplicates",
-      "dateCreated": "10/21/2021",
-      "complete": true,
-      "dateCompleted": "10/24/2021",
-      "id": 7
+      "title": "5.- This is the fifth task to do",
+      "description": "This is the description of the fifth task yet to be done.",
+      "dateCreated": "11/1/2021",
+      "complete": false,
+      "dateCompleted": null,
+      "id": 5
     }
   ],
   "users": [
@@ -58,6 +66,11 @@
       "username": "newuser",
       "password": "newpwd",
       "id": 5
+    },
+    {
+      "username": "testregister2",
+      "password": "2323",
+      "id": 6
     }
   ]
 }

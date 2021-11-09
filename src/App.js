@@ -1,56 +1,47 @@
-import React, {useReducer, useEffect} from 'react';
+import React, {useState, useReducer, useEffect} from 'react';
+import { mount, route } from 'navi';
+import { Router, View } from 'react-navi';
 
-//import User from './user/User';
-import ToDoList from './todos/ToDoList';
-import UserBar from './user/UserBar';
+import { Container } from 'react-bootstrap';
+
 import appReducer from './reducers';
+ 
+
+import { StateContext } from './Contexts';
 import AddToDoItem from './todos/AddToDoItem';
-
-import {  StateContext } from './Contexts';
-import { useResource } from 'react-request-hook';
-
-
-
+import ToDoPage from './pages/ToDoPage';
+import HeaderBar from './pages/HeaderBar';
+import HomePage from './pages/HomePage';
 
 function App() {
-  
-  const [ items, getToDoItems ] = useResource(() => ({
-    url: '/todos',
-    method: 'get'
-  }))
 
   const [ state, dispatch ] = useReducer(appReducer, { user: '', items: [] })
 
-  useEffect(getToDoItems, [])
-
-  useEffect(() => {
-      if (items && items.data) {
-          dispatch({ type: 'FETCH_TODO_ITEMS', items: items.data.reverse() })
-      }
-  }, [items])
-
-
-
   const {user} = state;
 
-/*   useEffect(() => {
-    if (user) {
-       document.title = `${user}’s ToDo List` 
-     } else {
-       document.title = 'ToDo List'
-   }
-  }, [user])
- */
+
+ const routes = mount({
+  '/': route({ view: <HomePage /> }),
+  '/todos/create': route({ view: <AddToDoItem /> }),
+  '/todos/:id': route(req => {
+      return { view: <ToDoPage id={req.params.id} /> }
+  }),
+})
+
+ 
 
   return (
     <div>
-      <StateContext.Provider value={{state: state, dispatch: dispatch}}>
-        <UserBar />
-        <br/><hr/><br/> 
-        {user && <AddToDoItem /> }<br/>
-        {user && <div> <h3>Todo List</h3></div>}
-        {user && <ToDoList />}
-      </StateContext.Provider>
+      
+        <StateContext.Provider value={{state: state, dispatch: dispatch}}>
+          <Router routes={routes}>
+            <Container>
+                <HeaderBar/>
+                <hr />
+                <View />
+            </Container>
+            </Router>
+        </StateContext.Provider>
       
     </div>
   )
