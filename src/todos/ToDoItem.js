@@ -1,69 +1,73 @@
 import React, {useContext, useEffect}  from 'react'
+import { Link } from 'react-navi'
+import { Card, Button } from 'react-bootstrap'
+
 import { StateContext } from '../Contexts'
+import { useNavigation } from 'react-navi'
 
 import { useResource } from 'react-request-hook'
 
-export default function ToDoItem ({item}) {
+function ToDoItem (todo) {
+    const {state, dispatch} = useContext(StateContext)
+
+    const navigation = useNavigation()
 
   
-    const {dispatch} = useContext(StateContext)
-
-    const [todoitem, deleteToDoItem ] = useResource((i) => ({
-        url: `/todos/${i}`,  
+    const [deletedTodo, deleteToDoItem ] = useResource((todoId) => ({
+        url: `/todos/${todoId}`,  
+        headers: {"Authorization": `${state.user.access_token}`},
         method: 'delete'
     }))
 
-
-    function handleDeleteToDoItem (i) {
-        deleteToDoItem(i);
-        //dispatch({type: "DELETE_TODO_ITEM", id: item.id}); 
-                
-    }
-    useEffect(() => {
-        if (todoitem && todoitem.data  && !todoitem.isLoading) { //TODO ADD LOADING THING
-            dispatch({type: "DELETE_TODO_ITEM", id: item.id});
-        }
-   }, [todoitem])
-
-    
-   
-   
-   
-   
-   const [todoitem2, completeToDoItem ] = useResource((i, c) => ({
-        url: `/todos/${i}`,  
-        method: 'PATCH',
+    const [toggledTodo, toggleToDoItem ] = useResource((todoId, c) => ({
+        url: `/todos/${todoId}`,  
+        method: 'patch',
+        headers: {"Authorization": `${state.user.access_token}`},
         data: {
-            complete: !c,
-            dateCompleted: !c ? new Date(Date.now()).toLocaleDateString() : null
-
+            completed: c
         }
     }))
 
-
-    function handleCompleteToDoItem (i,c) {
-        completeToDoItem(i, c);
-    }
-      
-
     
+    useEffect(() => {
+        if (deletedTodo && deletedTodo.data  && !deletedTodo.isLoading) { //TODO ADD LOADING THING
+            dispatch({type: "DELETE_TODO_ITEM", _id: deletedTodo.data._id});
+            console.log(deletedTodo.data)
+            //navigation.navigate(``) // TODO Navigate to as to go back
+        }
+   }, [deletedTodo])
 
     useEffect(() => {
-           if (todoitem2 && todoitem2.data && !todoitem2.isLoading) {
-                dispatch({type: "TOGGLE_TODO_ITEM", id: todoitem2.data.id, complete: todoitem2.data.complete, dateCompleted: todoitem2.data.dateCompleted});
+           if (toggledTodo && toggledTodo.data && !toggledTodo.isLoading) {
+                console.log('Toggle ToDo: ')
+                console.log(toggledTodo.data)
+                dispatch({type: "TOGGLE_TODO_ITEM", _id: toggledTodo.data._id, completed: toggledTodo.data.completed, completedOn: toggledTodo.data.completedOn});
            }
-      }, [todoitem2])
+      }, [toggledTodo])
 
 
 
       
   return (
-     <div>
-          <input type="checkbox"  name="complete"  checked={item.complete} onChange={e => { handleCompleteToDoItem(item.id, item.complete);} }/>  <b>{item.title}</b><br/>
-          Description: {item.description}<br/>
-          Creation Date: {item.dateCreated}<br/>
-          Completion date: {item.dateCompleted ? item.dateCompleted : ""} <br/>
-          <button onClick={e => {handleDeleteToDoItem(item.id);}} name="delete">Remove</button>
-     </div> 
+    <Card>
+        <Card.Body>
+            <Card.Title><Link href={`/todos/${todo._id}`}>{todo.title}</Link>
+            </Card.Title>
+            <Card.Subtitle>
+            <i>Created by <b>{todo.author}</b></i>
+            </Card.Subtitle>
+            <Card.Text>
+            {todo.description}
+            </Card.Text>
+            {todo.createdOn && <i>Created on: {todo.createdOn}</i>}<br/>
+            {// TODO: disable the checkbox if it not the author
+            }
+            <input type="checkbox" name="completed" checked={todo.completed} onChange={e => {toggleToDoItem(todo._id, todo.completed)}} />&nbsp;&nbsp;
+            {todo.completed && <i>Completed on: {todo.completedOn ? todo.completedOn : ""}</i>}<br/>
+            <Button variant="link" onClick={(e) => {deleteToDoItem(todo._id)}}>Delete ToDo</Button>
+    </Card.Body>
+    </Card>
  )
 }
+
+export default React.memo(ToDoItem);

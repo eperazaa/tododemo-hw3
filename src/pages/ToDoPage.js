@@ -1,23 +1,30 @@
-import React, { useEffect } from 'react'
+import React, {useContext, useEffect} from 'react'
 import { useResource } from 'react-request-hook'
+
+import { StateContext } from '../Contexts'
 
 import { Link } from 'react-navi'
 
 import ToDoItem from '../todos/ToDoItem'
 
 
+
+
 export default function ToDoPage ({ id }) {
-    const [ item, getToDoItem ] = useResource(() => ({
+    const {state} = useContext(StateContext)
+    
+    const [ todo, getToDo ] = useResource(() => ({
         url: `/todos/${id}`,
+        headers: {"Authorization": `${state.user.access_token}`},
         method: 'get'
     }))
 
-    useEffect(getToDoItem, [id])
+    useEffect(getToDo, [id])
 
     return (
         <div>
-            {(item && item.data)
-                ? <ToDoItem {...item.data} />
+            {(todo && todo.data)
+                ? <ToDoItem {...todo.data} />
                 : 'Loading...'
             }
             <div><Link href="/">Go back</Link></div>

@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 
-import AddToDoItem from '../todos/AddToDoItem'
 import UserBar from '../user/UserBar'
 import Header from '../Header'
 
@@ -23,7 +22,8 @@ export default function HeaderBar () {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              {user && <Nav.Link><Link href="/todos/create">Add TODO Item</Link></Nav.Link>}
+              <Nav.Link><Link href="/users">Users</Link></Nav.Link>
+              {user.username && <Nav.Link>| <Link href="/todos/create">Add TODO</Link></Nav.Link>}
               
             </Nav>
             <React.Suspense fallback={"Loading..."}>

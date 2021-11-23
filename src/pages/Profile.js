@@ -1,14 +1,19 @@
-import React, { useEffect, useContext } from 'react'
-import { StateContext } from '../Contexts'
+import React, {useContext, useEffect} from 'react'
 import { useResource } from 'react-request-hook'
+
+import { StateContext } from '../Contexts'
+
+
+
 import ToDoList from '../todos/ToDoList'
 
 
-export default function HomePage () {
+
+
+export default function Profile ({ id }) {
     const { state, dispatch } = useContext(StateContext)
     const [ todos, getTodos ] = useResource(() => ({
-        url: '/todos',
-        headers: {"Authorization": `${state.user.access_token}`},
+        url:  `/users/${id}`,
         method: 'get'
     }))
 
@@ -31,4 +36,4 @@ export default function HomePage () {
         
         </>
     )
-} 
+}

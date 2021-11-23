@@ -12,16 +12,26 @@ import AddToDoItem from './todos/AddToDoItem';
 import ToDoPage from './pages/ToDoPage';
 import HeaderBar from './pages/HeaderBar';
 import HomePage from './pages/HomePage';
+import UsersPage from './pages/UsersPage';
+import Profile from './pages/Profile';
 
 function App() {
 
-  const [ state, dispatch ] = useReducer(appReducer, { user: '', items: [] })
+  const [ state, dispatch ] = useReducer(appReducer, { user: {}, todos: [], users: [] })
 
   const {user} = state;
 
 
- const routes = mount({
+ 
+ 
+ 
+ 
+  const routes = mount({
   '/': route({ view: <HomePage /> }),
+  '/todos':  route({ view: <HomePage /> }),
+  '/users':  route({ view: <UsersPage /> }),
+  '/users/:id': route(req => {
+    return { view: <Profile id={req.params.id} /> }}),
   '/todos/create': route({ view: <AddToDoItem /> }),
   '/todos/:id': route(req => {
       return { view: <ToDoPage id={req.params.id} /> }
@@ -30,7 +40,13 @@ function App() {
 
  
 
-  return (
+  
+
+
+
+
+
+return (
     <div>
       
         <StateContext.Provider value={{state: state, dispatch: dispatch}}>

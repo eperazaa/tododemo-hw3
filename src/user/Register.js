@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react'
-import { useContext } from 'react/cjs/react.development';
+import React, {useState, useEffect, useContext} from 'react'
 import { useResource } from 'react-request-hook';
 import {Form, Modal, Button} from 'react-bootstrap'
 
@@ -15,33 +14,39 @@ export default function Register({show, handleClose}) {
     passwordRepeat: ""
 })
 
+const [ status, setStatus] = useState("")
+
 const [ user, register ] = useResource((username, password) => ({
-  url: '/users',
-  method: 'post',
-  data: { username, password }
+  url: 'auth/register',
+  method: 'post',
+  data: { username, password, 'passwordConfirmation': password }
 }))
+
 
 useEffect(() => {
   if (user && user.data) {
-    dispatch({ type: 'REGISTER', username: user.data.username })
-    
+      dispatch({ type: 'REGISTER', username: user.data.username, access_token: user.data.access_token  })
   }
 }, [user])
 
-  /* return (
-    
-      <form onSubmit={e => {e.preventDefault(); register(formData.username, formData.password); }}>
-          <br/>
-          <h3>Sign Up here:</h3>
-          <input placeholder="Username" type="text" name="register-username" id="register-username" value={formData.username} onChange={e => setFormData({...formData, username: e.target.value})} /><br/>
+useEffect(() => {
+    if (user && user.isLoading === false && (user.data || user.error)) {
+      if (user.error) {
+        console.log(user)
+        setStatus("Registration failed, please try again later.")
+        alert("fail")
+      } else {
+        console.log(user)
+        setStatus("Registration successful. You may now login.")
+        alert("success")
+      }
+        //dispatch({ type: 'REGISTER', username: user.data.username })
+    }
+  }, [user])
+  
 
-          <input placeholder="Password" type="password" name="register-password" id="register-password" value={formData.password} onChange={e => setFormData({...formData, password: e.target.value})} /><br/>
 
-          <input  placeholder="Retype Your Password" type="password" name="register-password-repeat" id="register-password-repeat" value={formData.passwordRepeat} onChange={e => setFormData({...formData, passwordRepeat: e.target.value})} /><br/><br/>
 
-          <input type="submit" value="Register" disabled={formData.username.length === 0 || formData.password.length === 0 || formData.password !== formData.passwordRepeat} />
-      </form>
-  ) */
   return (
 
     <Modal show={show} onHide={handleClose}>

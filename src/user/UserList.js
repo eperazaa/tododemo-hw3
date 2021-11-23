@@ -1,17 +1,17 @@
 import React, { useContext } from 'react'
-import ToDoItem from './ToDoItem'
+import UserEntry from './UserEntry'
 
 import { StateContext } from '../Contexts'
 
 
-export default function ToDoList () {
+export default function UserList () {
 
       const {state} = useContext(StateContext)
-      const {todos} = state;
+      const {users} = state;
 
      return (
       <div>
-      {todos.map((t, i) => <ToDoItem {...t} todo={t} id={t._id} key={i} />)}
+      {users.map((t, i) => <UserEntry {...t} userentry={t} id={t._id} key={i} />)}
       
       </div> 
       )

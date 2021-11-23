@@ -2,11 +2,17 @@ function userReducer (state, action) {
     switch (action.type) {
         case 'LOGIN':
         case 'REGISTER':
-            return action.username
+            return {
+                'username': action.username,
+                'access_token': action.access_token
+            }
         case 'LOGOUT':
-            return ''
+          return {
+                'username': undefined,
+                'access_token': undefined
+           }
         default:
-            return state;
+          return state;
     }
 }
 
@@ -17,9 +23,10 @@ function todoItemReducer (state, action) {
           id: action.id, 
           title: action.title,
           description: action.description, 
-          dateCreated: action.dateCreated,
-          complete: action.complete,
-          dateCompleted: action.dateCompleted
+          createdOn: action.createdOn,
+          completed: false,
+          completedOn: undefined,
+          author: action.author
         }
         const filterTodo = state.filter((t) => t.id === action.id);
         if (filterTodo.length === 0) {
@@ -29,18 +36,35 @@ function todoItemReducer (state, action) {
 
 
       case 'TOGGLE_TODO_ITEM':  
-        console.log("COMPLETE");
-        return state.map((item) => item.id === action.id ? { ...item, complete: action.complete, dateCompleted: action.dateCompleted } : item);   
+        return state.map((todo) => { 
+            console.log(todo._id + "," + action._id)
+            if(todo._id === action._id ) 
+              return { ...todo, completed: action.completed, completedOn: action.completedOn } 
+            else 
+              return todo
+            }   
+            
+          )
 
       case 'DELETE_TODO_ITEM': 
         console.log("DELETE");
-        return  state.filter((item) => item.id !== action.id); 
+        return  state.filter((todo) => todo._id !== action._id); 
       case 'FETCH_TODO_ITEMS':
-        return action.items;
+        return action.todos;
       default:
           return state;
     }
   }
+
+  function usersReducer (state, action) {
+    switch (action.type) {
+        
+        case 'FETCH_USERS':
+          return action.users;
+        default:
+            return state;
+      }
+    }
 
   /* function todoListReducer (state, action) {
     switch (action.type) {
@@ -73,6 +97,7 @@ function todoItemReducer (state, action) {
   export default function appReducer (state, action) {
     return {
         user: userReducer(state.user, action),
-        items: todoItemReducer(state.items, action)//,        lists: todoListReducer (state, action)
+        todos: todoItemReducer(state.todos, action), 
+        users: usersReducer(state.users, action)      // lists: todoListReducer (state, action)
     }
   }

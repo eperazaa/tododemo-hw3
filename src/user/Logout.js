@@ -1,5 +1,5 @@
-import React from 'react'
-import { useContext } from 'react/cjs/react.development';
+import React, { useContext } from 'react'
+
 
 import { StateContext } from '../Contexts';
 
@@ -9,7 +9,7 @@ import { StateContext } from '../Contexts';
 
   return (
     <form onSubmit={e => {e.preventDefault(); dispatch({type:"LOGOUT"}) } }>
-       Logged in as: <b>{user}</b> <br/>
+       Logged in as: <b>{user.username}</b> <br/>
        <input type="submit" value="Logout" />
     </form>
    )
