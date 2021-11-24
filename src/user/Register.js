@@ -25,7 +25,7 @@ const [ user, register ] = useResource((username, password) => ({
 
 useEffect(() => {
   if (user && user.data) {
-      dispatch({ type: 'REGISTER', username: user.data.username, access_token: user.data.access_token  })
+      dispatch({ type: 'REGISTER', username: user.data.username, access_token: user.data.access_token , _id: user.data._id  })
   }
 }, [user])
 

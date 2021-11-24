@@ -33,7 +33,7 @@ export default function Login({show, handleClose}) {
                 } else {
                     setLoginFailed(false)
                     console.log(user.data)
-                    dispatch({ type: 'LOGIN', username, access_token: user.data.access_token })          
+                    dispatch({ type: 'LOGIN', username, access_token: user.data.access_token, _id: user.data._id })          
                 }
             } 
         }, [user])

@@ -4,12 +4,14 @@ function userReducer (state, action) {
         case 'REGISTER':
             return {
                 'username': action.username,
-                'access_token': action.access_token
+                'access_token': action.access_token,
+                '_id': action._id
             }
         case 'LOGOUT':
           return {
                 'username': undefined,
-                'access_token': undefined
+                'access_token': undefined,
+                '_id': undefined
            }
         default:
           return state;

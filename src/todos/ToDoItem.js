@@ -1,14 +1,13 @@
 import React, {useContext, useEffect}  from 'react'
-import { Link } from 'react-navi'
+import { Link, useNavigation } from 'react-navi'
 import { Card, Button } from 'react-bootstrap'
 
 import { StateContext } from '../Contexts'
-import { useNavigation } from 'react-navi'
-
 import { useResource } from 'react-request-hook'
 
 function ToDoItem (todo) {
     const {state, dispatch} = useContext(StateContext)
+
 
     const navigation = useNavigation()
 
@@ -60,11 +59,10 @@ function ToDoItem (todo) {
             {todo.description}
             </Card.Text>
             {todo.createdOn && <i>Created on: {todo.createdOn}</i>}<br/>
-            {// TODO: disable the checkbox if it not the author
-            }
-            <input type="checkbox" name="completed" checked={todo.completed} onChange={e => {toggleToDoItem(todo._id, todo.completed)}} />&nbsp;&nbsp;
+            <input type="checkbox" name="completed" disabled={state.user._id !== todo.author} checked={todo.completed} onChange={e => {toggleToDoItem(todo._id, todo.completed)}} />&nbsp;&nbsp;
             {todo.completed && <i>Completed on: {todo.completedOn ? todo.completedOn : ""}</i>}<br/>
-            <Button variant="link" onClick={(e) => {deleteToDoItem(todo._id)}}>Delete ToDo</Button>
+            {console.log(state.user._id + ' - ' + todo.author)}
+            { (state.user._id === todo.author) && <Button variant="link" onClick={(e) => {deleteToDoItem(todo._id)}}>Delete ToDo</Button>}
     </Card.Body>
     </Card>
  )

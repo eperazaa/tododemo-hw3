@@ -25,9 +25,10 @@ export default function HomePage () {
         }
     }, [todos])
     const { data, isLoading } = todos;
+    const {user} = state;
     return (
         <>
-         {isLoading && 'ToDos loading...'} <ToDoList />
+         { isLoading && 'ToDos loading...'} {user.username && (<ToDoList />)}
         
         </>
     )
