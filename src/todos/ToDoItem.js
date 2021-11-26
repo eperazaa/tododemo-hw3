@@ -50,19 +50,19 @@ function ToDoItem (todo) {
   return (
     <Card>
         <Card.Body>
-            <Card.Title><Link href={`/todos/${todo._id}`}>{todo.title}</Link>
+            <Card.Title> <input type="checkbox" name="completed" disabled={state.user._id !== todo.author} checked={todo.completed} onChange={e => {toggleToDoItem(todo._id, todo.completed)}} />&nbsp;&nbsp;{ (state.user._id === todo.author) && <span onClick={(e) => {deleteToDoItem(todo._id)}}><i class="fa fa-minus-circle red-color" ></i></span>}&nbsp;&nbsp;<Link href={`/todos/${todo._id}`}>{todo.title}</Link>
             </Card.Title>
             <Card.Subtitle>
-            <i>Created by <b>{todo.author}</b></i>
+            <i>Created by <b>{todo.username}</b></i>
             </Card.Subtitle>
             <Card.Text>
             {todo.description}
             </Card.Text>
             {todo.createdOn && <i>Created on: {todo.createdOn}</i>}<br/>
-            <input type="checkbox" name="completed" disabled={state.user._id !== todo.author} checked={todo.completed} onChange={e => {toggleToDoItem(todo._id, todo.completed)}} />&nbsp;&nbsp;
+           
             {todo.completed && <i>Completed on: {todo.completedOn ? todo.completedOn : ""}</i>}<br/>
             {console.log(state.user._id + ' - ' + todo.author)}
-            { (state.user._id === todo.author) && <Button variant="link" onClick={(e) => {deleteToDoItem(todo._id)}}>Delete ToDo</Button>}
+            { (state.user._id === todo.author) && <Button variant="primary" style={{float: 'right'}}  onClick={(e) => {deleteToDoItem(todo._id)}}>Delete ToDo</Button>}
     </Card.Body>
     </Card>
  )
